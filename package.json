@@ -1,0 +1,21 @@
+{
+  "name": "comp125-midterm",
+  "version": "1.2.0",
+  "description": "MidTerm Exam for COMP125 - Client-Side Web Development @ Centennial College",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fatih Erol - 301109491",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/bootstrap": "^4.5.0",
+    "@types/jquery": "^3.5.0"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
+    "bootstrap": "^4.5.0",
+    "jquery": "^3.5.1",
+    "popper.js": "^1.16.1"
+  }
+}
