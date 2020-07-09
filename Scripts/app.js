@@ -2,7 +2,7 @@
   "use strict";
 
   function Start() {
-    console.log('%cApp Started...', "color:white; font-size: 24px;");
+    console.log('%cApp Started...', "color:Black; font-size: 18px;");
 
     let StringVariables = {
       introParagraph:
