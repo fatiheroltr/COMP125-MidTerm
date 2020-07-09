@@ -25,3 +25,14 @@ article, section {
 #contactForm {
     margin-bottom: 4em;
 }
+
+.carousel-item {
+    height: 500px;
+}
+
+@media only screen and (max-width: 768px) {
+    .carousel-item {
+        padding-top: 56px;
+        height: 100%;
+    }
+}
