@@ -1,5 +1,9 @@
 /* custom syle sheet */
 
+html {
+    scroll-behavior: smooth;
+}
+
 .navbar {
     opacity: 0.8;
 }
