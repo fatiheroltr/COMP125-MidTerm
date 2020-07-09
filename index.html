@@ -13,6 +13,8 @@
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
+
+  <!-- Main Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <a class="navbar-brand" href="#">
       <i class="fa fa-globe fa-lg"></i>
@@ -36,9 +38,7 @@
     </div>
   </nav>
 
-  <!-- MAIN CONTENT SECTION -->
-
-  <!-- Carousel Starts -->
+  <!-- Carousel -->
   <div class="d-flex justify-content-center">
 
     <div id="Carousel-top" class="carousel slide" data-ride="carousel">
@@ -73,7 +73,9 @@
 
     </div>
   </div>
-  <!-- Carousel Ends -->
+
+  <!-- MAIN CONTENT SECTION -->
+
   <main class="container" id="mainContent">
 
     <h1 id="MainTitle" class="col-lg-offset-1 col-lg-10">
@@ -191,34 +193,41 @@
           <div class="panel-heading">
             <h3 class="panel-title">Contact Us</h3>
           </div>
+          <div id="errorMessage" class="alert alert-danger" role="alert" hidden>
+          </div>
           <div class="panel-body">
             <form id="contactForm" class="form">
               <div class="form-group">
                 <label for="firstName">First Name</label>
                 <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name"
-                  required />
+                  aria-describedby="firstName" required />
               </div>
               <div class="form-group">
                 <label for="lastName">Last Name</label>
                 <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name"
-                  required />
+                  aria-describedby="lastName" required />
               </div>
               <div class="form-group">
                 <label class="form-label" for="contactNumber">Contact Number</label>
-                <input type="tel" class="form-control" id="contactNumber" name="email" placeholder="Contact Number"
-                  required />
+                <input type="tel" class="form-control" id="contactNumber" name="contactNumber"
+                  placeholder="Contact Number" aria-describedby="contactNumber" required />
               </div>
               <div class="form-group">
                 <label class="form-label" for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email" required />
+                <input type="email" class="form-control" id="email" name="email" placeholder="Email"
+                  aria-describedby="email" required />
               </div>
               <div class="form-group">
                 <label for="comments">Your Message</label>
-                <textarea class="form-control" rows="5" id="yourMessage" name="comments"
+                <textarea class="form-control" rows="5" id="comments" name="comments"
                   placeholder="Enter Your Comments Here" required></textarea>
               </div>
               <div class="text-right">
-                <button id="sendButton" type="submit" class="btn btn-primary">
+                <button id="resetButton" type="reset" class="btn btn-danger btn-large"><i class="fas fa-trash-alt"></i>
+                  Clear
+                </button>
+                <button id="sendButton" type="submit" class="btn btn-primary btn-large"><i
+                    class="fas fa-paper-plane"></i>
                   Send
                 </button>
               </div>
