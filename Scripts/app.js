@@ -1,3 +1,10 @@
+/*
+File name : app.js v1.0
+Author : Fatih Erol
+Website : https://fatiheroltr.github.io/COMP125-MidTerm
+Description : COMP125 - Midterm Project
+*/
+
 "use strict";
 
 // IIFE - Immediately Ivoked Function Expression
@@ -47,9 +54,11 @@
     let contactForm = document.getElementById("contactForm");
 
     if (contactForm) {
+      let submitButton = document.getElementById("sendButton");
+      let errorMessage = document.getElementById("errorMessage");
 
       contactForm.noValidate = true;
-      let errorMessage = document.getElementById("errorMessage");
+      submitButton.disabled = true; // will be enabled after validation completed
 
       let firstName = document.getElementById("firstName");
       firstName.addEventListener("blur", (event) => {
@@ -57,12 +66,12 @@
           firstName.focus();
           errorMessage.hidden = false;
           errorMessage.textContent = "Please enter a valid First Name (at least two characters)"
+          firstName.classList.remove('valid'); // If a form element cannot be validated, loses the "valid" class
         }
         else {
           errorMessage.hidden = true;
-          console.log('%c+ Somebody writing to the contact form', "color:#228B22; font-size:12px;")
-          console.log('\n%cContact Form Output\n--------------------', "font-weight:bold; font-size:11px;")
-          console.log("First Name : " + firstName.value)
+          console.log('%c+ Somebody is writing to the contact form', "color:#228B22; font-size:12px;")
+          firstName.classList.add('valid'); // If a form element validated succesfully, takes a "valid" class
         }
       });
 
@@ -72,38 +81,41 @@
           lastName.focus();
           errorMessage.hidden = false;
           errorMessage.textContent = "Please enter a valid Last Name (at least two characters)"
+          lastName.classList.remove('valid'); // If a form element cannot be validated, loses the "valid" class
         }
         else {
           errorMessage.hidden = true;
-          console.log("Last Name : " + lastName.value)
+          lastName.classList.add('valid'); // If a form element validated succesfully, takes a "valid" class
         }
       });
 
       let contactNumber = document.getElementById("contactNumber");
       contactNumber.addEventListener("blur", (event) => {
-        let phoneNo = /^\d{10}$/;
+        let phoneNo = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/; // Ref: https://www.w3resource.com/javascript/form/javascript-form-validation.php
         if (contactNumber.value.match(phoneNo)) {
           errorMessage.hidden = true;
-          console.log("Phone number : " + contactNumber.value)
+          contactNumber.classList.add('valid'); // If a form element validated succesfully, takes a "valid" class
         }
         else {
           contactNumber.focus();
           errorMessage.hidden = false;
           errorMessage.textContent = "Please enter a valid Phone number (10 digits)";
+          contactNumber.classList.remove('valid'); // If a form element cannot be validated, loses the "valid" class
         }
       });
 
       let email = document.getElementById("email");
       email.addEventListener("blur", (event) => {
-        let eMail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        let eMail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/; // Ref: https://www.w3resource.com/javascript/form/javascript-form-validation.php
         if (email.value.match(eMail)) {
           errorMessage.hidden = true;
-          console.log("Email : " + email.value)
+          email.classList.add('valid'); // If a form element validated succesfully, takes a "valid" class
         }
         else {
           email.focus();
           errorMessage.hidden = false;
           errorMessage.textContent = "Please enter a valid email address";
+          email.classList.remove('valid'); // If a form element cannot be validated, loses the "valid" class
         }
       });
 
@@ -113,22 +125,42 @@
           comments.focus();
           errorMessage.hidden = false;
           errorMessage.textContent = "Message should be at least 10 character";
+          comments.classList.remove('valid'); // If a form element cannot be validated, loses the "valid" class
         }
         else {
           errorMessage.hidden = true;
-          console.log("Message : " + comments.value)
+          comments.classList.add('valid'); // If a form element validated succesfully, takes a "valid" class
         }
       });
 
-      let submitButton = document.getElementById("sendButton");
-      submitButton.disabled = true;
-      if (errorMessage.hidden === true) {
-        submitButton.disabled = false;
-      }
-
-      submitButton.addEventListener("click", () => {
+      submitButton.addEventListener("click", () => { // When the user presses to Send buttton
         event.preventDefault();
-        console.log('\n%c+ Send button clicked', "font-size:12px; color:#228B22;")
+        console.log('%c+ Send button clicked', "font-size:12px; color:#228B22;")
+        console.log('\n%cContact Form Output\n--------------------', "font-weight:bold; font-size:11px;")
+        console.log("First Name : " + firstName.value)
+        console.log("Last Name : " + lastName.value)
+        console.log("Phone number : " + contactNumber.value)
+        console.log("Email : " + email.value)
+        console.log("Message : " + comments.value)
+      });
+
+      let formElements = document.querySelectorAll('.form-control'); // // Store every form-control elements
+      formElements.forEach(function (input) { // Loop through each of the form-control element
+        input.addEventListener("blur", function () { // Listen for the "blur" event for the current form-control element
+          let validFormElements = document.querySelectorAll('.valid'); // store all of the validated form-control elements 
+          // during the blur event, so that we have the most up to date valid fields stored.
+
+          // Check the number of form elements against the number of valid form elements
+          // If the numbers are equal, our form is valid, otherwise we still have
+          // invalid fields
+          if (formElements.length == validFormElements.length) {
+            submitButton.disabled = false;
+            console.log('%c+ Form validation completed and Send button enabled', "font-size:12px; color:#228B22;")
+          }
+          else {
+            submitButton.disabled = true; // disable the send button
+          }
+        });
       });
     }
 
@@ -137,14 +169,14 @@
 
   function Start() {
     console.log('%cThe Travel Report App Started!', "font-size: 16px; font-weight:bold; color:darkred;");
-    console.log('%cWhat is happening :', "font-weight:bold; font-size:14px;")
+    console.log('%cCurrent Status:', "font-weight:bold; font-size:14px;")
 
     let success = addParagraphsToPage();
     if (success) {
       console.log('%c+ Successfully added paragraphs to the page', "color:#228B22; font-size:12px;");
     }
     else {
-      console.warn("- Content not added to the page!");
+      console.warn('%c- Content not added to the page!', "color:red; font-size:12px;");
     }
 
     formValidation();
